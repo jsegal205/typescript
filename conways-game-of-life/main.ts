@@ -7,10 +7,10 @@ const createGrid: (col: number, row: number) => string[][] = (col, row) => {
     return []
   }
   // setup grid and init random set of cells
-  return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => Math.random() < 0.5 ? alive : dead))
+  return new Array(row).fill(dead).map(() => new Array(col).fill(dead).map(() => Math.random() < 0.5 ? alive : dead))
 
   // uncomment below for testing early returns
-  // return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => dead))
+  // return new Array(row).fill(dead).map(() => new Array(col).fill(dead).map(() => dead))
 }
 
 const getLiveNeighbors = (grid: string[][], rowIndex: number, colIndex: number ) => {

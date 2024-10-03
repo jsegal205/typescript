@@ -3,8 +3,9 @@ const alive = "*"
 const dead = ""
 
 const createGrid: (col: number, row: number) => string[][] = (col, row) => {
-  if (!Boolean(col) || !Boolean(row)) {
+  if (col <= 0 || row <= 0) {
     console.log("please supply a column value and row value")
+    return []
   }
   // setup grid and init random set of cells
   // return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => Math.random() < 0.5 ? alive : dead))

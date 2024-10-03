@@ -1,18 +1,3 @@
-// Conways game of life implementation
-// https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
-
-// rules:
-//     Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-//     Any live cell with two or three live neighbours lives on to the next generation.
-//     Any live cell with more than three live neighbours dies, as if by overpopulation.
-//     Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-
-// time concerns
-// we early return if the grid ever stops changing during iterations leaving with a best case of O(1) and worst case of O(row*col)
-
-// space concerns
-// previous commits used recursion which has worst case of O(iterations), recursion also takes up stack space therefore if iterations or gridsize are high, this could lead to stack overflow
-// the for loop has O(1) constant space
 const alive = "*"
 const dead = ""
 
@@ -23,6 +8,8 @@ const createGrid: (col: number, row: number) => string[][] = (col, row) => {
   }
   // setup grid and init random set of cells
   return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => Math.random() < 0.5 ? alive : dead))
+
+  // uncomment below for testing early returns
   // return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => dead))
 }
 
@@ -65,7 +52,7 @@ const run: (grid: string[][], iterations: number) => void = (grid, iterations = 
   // check biz rules, update cells accordingly
 
   for (let iteration = 0; iteration < iterations; iteration++){
-    console.log(iteration)
+    console.log("iteration", iteration)
     console.log(grid.map(row => row.join(" ")).join("\n"));
 
     const iterationGrid = grid.map((row, rowIndex) => {

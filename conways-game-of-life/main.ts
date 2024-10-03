@@ -7,7 +7,8 @@ const createGrid: (col: number, row: number) => string[][] = (col, row) => {
     console.log("please supply a column value and row value")
   }
   // setup grid and init random set of cells
-  return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => Math.random() < 0.5 ? alive : dead))
+  // return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => Math.random() < 0.5 ? alive : dead))
+  return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => dead))
 }
 
 const getLiveNeighbors = (grid: string[][], rowIndex: number, colIndex: number ) => {
@@ -62,7 +63,8 @@ const run: (grid: string[][], iterations: number) => void = (grid, iterations = 
       })
     })
 
-    if (iterations > 0) {
+    // stringify is quick and dirty, could update to actual iterator to check distinct values
+    if (JSON.stringify(grid) !== JSON.stringify(iterationGrid) &&  iterations > 0) {
       run(iterationGrid, iterations - 1)
     }
 }

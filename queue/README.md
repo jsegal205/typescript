@@ -1,6 +1,6 @@
-# Message Queue
+# Queue
 
-A message queue implementation in typescript
+A queue implementation in typescript
 
 ## Run
 

@@ -1,4 +1,18 @@
+// Conways game of life implementation
+// https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
+// rules:
+//     Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+//     Any live cell with two or three live neighbours lives on to the next generation.
+//     Any live cell with more than three live neighbours dies, as if by overpopulation.
+//     Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+
+// time concerns
+// we early return if the grid ever stops changing during iterations leaving with a best case of O(1) and worst case of O(row*col)
+
+// space concerns
+// previous commits used recursion which has worst case of O(iterations), recursion also takes up stack space therefore if iterations or gridsize are high, this could lead to stack overflow
+// the for loop has O(1) constant space
 const alive = "*"
 const dead = ""
 
@@ -33,7 +47,7 @@ const getLiveNeighbors = (grid: string[][], rowIndex: number, colIndex: number )
   }, 0)
 }
 
-// performace check
+// performace check to not iterate if the grid when nothing will change
 const areGridsSame = (grid1: string[][], grid2: string[][]) => {
   for (let row = 0; row < grid1.length; row++) {
     for (let col = 0; col < grid1[row].length; col++) {

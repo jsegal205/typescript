@@ -8,8 +8,8 @@ const createGrid: (col: number, row: number) => string[][] = (col, row) => {
     return []
   }
   // setup grid and init random set of cells
-  // return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => Math.random() < 0.5 ? alive : dead))
-  return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => dead))
+  return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => Math.random() < 0.5 ? alive : dead))
+  // return new Array(row).fill(false).map(() => new Array(col).fill(false).map(() => dead))
 }
 
 const getLiveNeighbors = (grid: string[][], rowIndex: number, colIndex: number ) => {
@@ -49,9 +49,11 @@ const run: (grid: string[][], iterations: number) => void = (grid, iterations = 
   // run as many times as number of iterations
   // iterate over each cell
   // check biz rules, update cells accordingly
-  console.log(grid)
 
   for (let iteration = 0; iteration < iterations; iteration++){
+    console.log(iteration)
+    console.log(grid.map(row => row.join(" ")).join("\n"));
+
     const iterationGrid = grid.map((row, rowIndex) => {
       return row.map((col, colIndex) => {
         const countLiveNeighbors = getLiveNeighbors(grid, rowIndex, colIndex)
@@ -80,6 +82,8 @@ const run: (grid: string[][], iterations: number) => void = (grid, iterations = 
     if (areGridsSame(grid, iterationGrid)) {
       break
     }
+
+    grid = iterationGrid
   }
 }
 

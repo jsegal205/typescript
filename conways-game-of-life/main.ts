@@ -32,12 +32,25 @@ const getLiveNeighbors = (grid: string[][], rowIndex: number, colIndex: number )
   }, 0)
 }
 
+// performace check
+const areGridsSame = (grid1: string[][], grid2: string[][]) => {
+  for (let row = 0; row < grid1.length; row++) {
+    for (let col = 0; col < grid1[row].length; col++) {
+      if (grid1[row][col] !== grid2[row][col]) {
+        return false
+      }
+    }
+  }
+  return true
+}
+
 const run: (grid: string[][], iterations: number) => void = (grid, iterations = 3) => {
   // run as many times as number of iterations
   // iterate over each cell
   // check biz rules, update cells accordingly
+  console.log(grid)
 
-    console.log(grid)
+  for (let iteration = 0; iteration < iterations; iteration++){
     const iterationGrid = grid.map((row, rowIndex) => {
       return row.map((col, colIndex) => {
         const countLiveNeighbors = getLiveNeighbors(grid, rowIndex, colIndex)
@@ -63,15 +76,15 @@ const run: (grid: string[][], iterations: number) => void = (grid, iterations = 
       })
     })
 
-    // stringify is quick and dirty, could update to actual iterator to check distinct values
-    if (JSON.stringify(grid) !== JSON.stringify(iterationGrid) &&  iterations > 0) {
-      run(iterationGrid, iterations - 1)
+    if (areGridsSame(grid, iterationGrid)) {
+      break
     }
+  }
 }
 
 const gameOfLife: () => void = () => {
   const grid = createGrid(10, 10);
-  run(grid, 2)
+  run(grid, 20)
   console.log("complete")
 }
 

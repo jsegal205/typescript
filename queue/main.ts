@@ -43,12 +43,11 @@ queue.enqueue("string 2")
 console.log("isEmpty?", queue.isEmpty())
 console.log("current queue", queue)
 console.log("isFull?", queue.isFull())
+console.log("what's next in the queue?", queue.peek())
 
 queue.dequeue()
 console.log("isEmpty?", queue.isEmpty())
 console.log("current queue", queue)
-
-console.log("what's next in the queue?", queue.peek())
 
 // remove all things and some
 queue.dequeue()
